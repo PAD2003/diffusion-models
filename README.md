@@ -74,15 +74,3 @@ trainer.max_epochs=50
 ## Results
 
 I have trained a model with three datasets: MNIST, FashionMNIST, and CIFAR10. You can view the training report [here](https://api.wandb.ai/links/pad_team/sh4nigod)
-
-### MNIST
-
-![MNIST Generation](/imgs/MNIST.gif)
-
-### Fashion-MNIST
-
-![Fashion MNIST Generation](/imgs/FashionMNIST.gif)
-
-### CIFAR
-
-![CIFAR Generation](/imgs/CIFAR10.gif)
