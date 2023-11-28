@@ -39,8 +39,8 @@ pip install -r requirements.txt
 
 ```bash
 # clone project
-git clone https://github.com/YourGithubName/your-repo-name
-cd your-repo-name
+git clone https://github.com/PAD2003/base_diffusion_model.git
+cd base_diffusion_model
 
 # create conda environment and install dependencies
 conda env create -f environment.yaml -n myenv
@@ -64,5 +64,25 @@ python src/train.py trainer=gpu
 You can override any parameter from command line like this
 
 ```bash
-python src/train.py trainer.max_epochs=20 data.batch_size=64
+python -m src.train trainer=gpu \
+data.dataset_name="CIFAR10" data.train_val_test_split="[50_000, 10_000, 0]" \
+model.img_depth=3 \
+logger.wandb.group="ddpm" logger.wandb.name="CIFAR10" \
+trainer.max_epochs=50
 ```
+
+## Results
+
+I have trained a model with three datasets: MNIST, FashionMNIST, and CIFAR10. You can view the training report [here](https://api.wandb.ai/links/pad_team/sh4nigod)
+
+### MNIST
+
+![MNIST Generation](/imgs/mnist.gif)
+
+### Fashion-MNIST
+
+![Fashion MNIST Generation](/imgs/fashion.gif)
+
+### CIFAR
+
+![CIFAR Generation](/imgs/cifar.gif)
