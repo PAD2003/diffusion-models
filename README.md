@@ -77,12 +77,12 @@ I have trained a model with three datasets: MNIST, FashionMNIST, and CIFAR10. Yo
 
 ### MNIST
 
-![MNIST Generation](/imgs/mnist.gif)
+![MNIST Generation](/imgs/MNIST.gif)
 
 ### Fashion-MNIST
 
-![Fashion MNIST Generation](/imgs/fashion.gif)
+![Fashion MNIST Generation](/imgs/FashionMNIST.gif)
 
 ### CIFAR
 
-![CIFAR Generation](/imgs/cifar.gif)
+![CIFAR Generation](/imgs/CIFAR10.gif)
