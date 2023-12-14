@@ -15,6 +15,8 @@
 
 In this repository, I implemented two basic diffusion models (DDPM & DDIM). Both models were trained on the MNIST, FashionMNIST, and CIFAR10 datasets. The code for this implementation was referenced from [here](https://github.com/awjuliani/pytorch-diffusion).
 
+You can also download checkpoints at [my drive](https://drive.google.com/drive/folders/1AkVz7gZ6Ap3ZOqm8I3ZyqvN0AmtK3owi?usp=sharing)
+
 ## Installation
 
 #### Pip
