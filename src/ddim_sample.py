@@ -42,29 +42,34 @@ log = RankedLogger(__name__, rank_zero_only=True)
 
 def inference(cfg: DictConfig):
     DDPM_model = DDPMModule.load_from_checkpoint(cfg.ckpt_path)
-    sample = DDIMSample(
-        model=DDPM_model,
-        S=10,
-        ddim_discretize="uniform",
-        ddim_eta=0
-    )
-    torch.manual_seed(100)
-    gen_samples = sample.generate_sample()
-    gen_samples_np = gen_samples.to("cpu").numpy()
+    
+    for S in cfg.S:
+        for eta in cfg.eta:
 
-    frames = []
-    for frame_idx in range(gen_samples_np.shape[0]):
-        # Arrange sequences in a 3x3 grid for each frame
-        grid = np.vstack([np.hstack(gen_samples_np[frame_idx, i, j, :, :, 0] for j in range(3)) for i in range(3)])
-        frames.append(grid)
+            sample = DDIMSample(
+                model=DDPM_model,
+                S=S,
+                ddim_discretize="uniform",
+                ddim_eta=eta
+            )
+            
+            gen_samples = sample.generate_sample()
+            gen_samples_np = gen_samples.to("cpu").numpy()
 
-    # Save the GIF
-    file_path = "data/ddim_test_2.gif"
-    imageio.mimsave(file_path, frames, fps=3)
+            frames = []
+            for frame_idx in range(gen_samples_np.shape[0]):
+                # Arrange sequences in a 3x3 grid for each frame
+                grid = np.vstack([np.hstack(gen_samples_np[frame_idx, i, j, :, :, 0] for j in range(3)) for i in range(3)])
+                frames.append(grid)
+
+            # Save the GIF
+            file_path = f"data/gif/ddim_eta={eta}_S={S}.gif"
+            imageio.mimsave(file_path, frames, fps=3)
 
 @hydra.main(version_base="1.3", config_path="../configs", config_name="ddim_sample.yaml")
 def main(cfg: DictConfig):
     inference(cfg)
 
 if __name__ == "__main__":
+    torch.manual_seed(211)
     main()

@@ -1,0 +1,7 @@
+ckpt_path: /home/ducpa/code/diffusion-models/data/checkpoints/FashionMNIST.ckpt
+S:
+- 10
+- 100
+eta:
+- 0
+- 1

@@ -42,12 +42,12 @@ class DDIMSample:
         
         # components
         pred_x0 = (x_t - math.sqrt(1 - alpha_bar_t) * epsilon_theta) / math.sqrt(alpha_bar_t)
-        
         if self.ddim_eta == 0:
             pred_x0 = pred_x0.clamp(-1, 1)
             
         dir_xt = math.sqrt(1 - alpha_bar_t_prev - sigma_t ** 2) * epsilon_theta
-        if sigma_t == 0. or t_prev: # torch.tensor
+        
+        if sigma_t == 0. or t_prev == 0: # torch.tensor
             noise = 0.
         else:
             noise = torch.randn(x_t.shape, device=x_t.device)
@@ -58,6 +58,8 @@ class DDIMSample:
         return x_t_prev
     
     def generate_sample(self):
+        print(len(self.time_steps))
+        
         # config
         gif_shape = [3, 3]
         sample_batch_size = gif_shape[0] * gif_shape[1]
